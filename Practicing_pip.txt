@@ -1,0 +1,24 @@
+pip list: will list all the installed packages and their current Versions.
+
+call myEnvironments/py3Env/Scripts/activate: will activate virsual environment.
+
+deactivate: will deactivate the virsual environment (will exit the current active environment)
+
+pip install Django==2.2.4: will download and install Django packges the terminal will show the download and installtion progress.
+
+pip freeze: will list the installed packges (which is explictly installed by pip) and their versions.
+
+pip freeze > requirements.txt: this command will  list installed packges and their versions and sotre them in 
+a .txt file "in this case called requirements.txt"
+
+pip uninstall Django: will initalize the uninstalling process to delete Djangp package from our system, during 
+this process we will be asked to give a confirmation for the delete process by entering Y/n into the terminal
+  Would remove:
+    d:\codes and proects\github_files\python_stack\my_environments\py3env\lib\site-packages\django-2.2.4.dist-info\*
+    d:\codes and proects\github_files\python_stack\my_environments\py3env\lib\site-packages\django\*
+    d:\codes and proects\github_files\python_stack\my_environments\py3env\scripts\django-admin.exe
+    d:\codes and proects\github_files\python_stack\my_environments\py3env\scripts\django-admin.py
+Proceed (Y/n)?
+ 
+
+- pip show Django: gave us the following warrning : WARNING: Package(s) not found: Django
