@@ -8,6 +8,8 @@ colorama_init()
 
 import random
 def randInt(min= 0  , max= 100  ):
+    if max < 0:
+        return f"{Fore.RED}Attention !{Style.RESET_ALL} The max Value should be bigger than {Fore.RED}0{Style.RESET_ALL} "
     if min > max:
         return f"{Fore.RED}Attention !{Style.RESET_ALL} The max Value should be bigger than min value"
     max = max - min
