@@ -16,7 +16,7 @@ def randInt(min= 0  , max= 100  ):
     num = round((random.random() * max) + min)
     return num
 
-#Generate 50 values of each case to Validate it works preapply
+#Generate 50 values of each case to Validate it works as  intended
 for i in range(50):
     print(f"Using ranInt()                   : {randInt()}") 		                                            # should print a random integer between 0 to 100
     print(f"Using ranInt(max = 50)           : {Fore.YELLOW}{randInt(max=50)}{Style.RESET_ALL}") 	            # should print a random integer between 0 to 50
