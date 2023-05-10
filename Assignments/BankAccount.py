@@ -18,7 +18,7 @@ class BankAccount:
             return self
 
     def display_account_info(self):
-        print(f"The {self.name} Balance = {self.balance}")
+        print(f"{self.name} Balance = {self.balance}")
         return self
 
     def yield_interests(self):
