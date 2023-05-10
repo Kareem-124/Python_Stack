@@ -16,23 +16,17 @@ sports_directory = {
 }
 z = [ {'x': 10, 'y': 20} ]
 
+# -- Task 1: Update Values in Dictionaries and Lists
+print(f"\n \n {Fore.YELLOW}>>Task 1: Update Values in Dictionaries and Lists {Style.RESET_ALL} ")
 
-    
-    
-    
-    
 def update():
     x[1][0] = 15                            #Change the value 10 in x to 15. Once you're done, x should now be [ [5,2,3], [15,8,9] ].
     students[0]["last_name"] = "Bryant"     #Change the last_name of the first student from 'Jordan' to 'Bryant'
     sports_directory["soccer"][0]= "Andres" #In the sports_directory, change 'Messi' to 'Andres'
     z[0]["y"] = 30                          #Change the value 20 in z to 30
 
-# -- Task 1: Update Values in Dictionaries and Lists
-print(f"\n \n {Fore.YELLOW}>>Task 1: Update Values in Dictionaries and Lists {Style.RESET_ALL} ")
+
 update()
-
-
-
 
 #-- Task 2:Iterate Through a List of Dictionaries
 print(f"\n \n {Fore.YELLOW}>>Task 2:Iterate Through a List of Dictionaries {Style.RESET_ALL} ")
@@ -50,7 +44,6 @@ iterateDictionary(students)
 
 #-- Task 3: Get Values From a List of Dictionaries
 print(f"\n \n {Fore.YELLOW}>>Task 3: Get Values From a List of Dictionaries {Style.RESET_ALL} ")
-
 def iterateDictionary2(key_name, some_list):
     print(f"The value of {key_name} from the list =")
     for i in some_list:
