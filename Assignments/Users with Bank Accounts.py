@@ -34,8 +34,7 @@ class BankAccount:
 
         for i in self.balance:
             if self.balance[i] > 0:
-                self.balance[i] = self.balance[i] + \
-                    (self.balance[i] * self.int_rate)
+                self.balance[i] = self.balance[i] + (self.balance[i] * self.int_rate)
             else:
                 print(
                     f"The balance amount should not 0 or less / Current balance for {i}= {self.balance[i]}")
