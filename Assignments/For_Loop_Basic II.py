@@ -127,6 +127,6 @@ def reverse_list(list):
         list[i]= list[len(list) - i -1]
         list[len(list)- i -1] = temp
     return list
-x = [-1, 1, -1,5, -44, 6, 55]
+x = [-1, 1, -1,5, -44, 6, 55,1]
 x=reverse_list(x)
 print(f"Reverse list = {x}")

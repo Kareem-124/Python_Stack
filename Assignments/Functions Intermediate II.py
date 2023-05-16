@@ -52,7 +52,14 @@ def iterateDictionary2(key_name, some_list):
 iterateDictionary2("last_name",students)
 
 
+#-- Task 3.1: Get Values From a List of Dictionaries
+print(f"\n \n {Fore.YELLOW}>>Task 3: Get Values From a List of Dictionaries {Style.RESET_ALL} ")
+def iterateDictionary2(key_name, some_list):
+    print(f"The value of {key_name} from the list =")
+    for i in range(0,len(some_list),1):
+        print(f"{some_list[i][key_name]}")
 
+iterateDictionary2("last_name",students)
 
 #-- Task 4: Iterate Through a Dictionary with List Values
 print(f"\n \n {Fore.YELLOW} >>Task 4: Iterate Through a Dictionary with List Values {Style.RESET_ALL} ")
