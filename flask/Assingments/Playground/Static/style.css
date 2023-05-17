@@ -1,19 +1,20 @@
-body{
+body {
     display: flex;
     justify-content: start;
-    padding:100px;
+    padding: 100px;
     gap: 10px;
     border: 0px solid black;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 }
-.blue{
+
+.blue {
     width: 100px;
     height: 100px;
     background-color: rgb(127, 187, 255);
     border: 1px solid black;
 }
 
-.green{
+.green {
     width: 100px;
     height: 100px;
     background-color: rgb(127, 255, 204);
