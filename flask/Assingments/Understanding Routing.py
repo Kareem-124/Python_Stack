@@ -19,9 +19,11 @@ def repeat(number,text):
     return (text + " ") * number
 
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found(msg):
+    text = "Sorry! No response. Try again.     \n" + str(msg)
+    
     # return a custom error message for 404 errors
-    return "Sorry! No response. Try again.", 404
+    return (text) 
 
 if __name__ == "__main__":
     app.run(debug = True)
