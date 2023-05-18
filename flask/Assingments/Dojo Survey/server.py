@@ -8,7 +8,15 @@ def index():
 @app.route('/process', methods=['POST'])
 def process_form():
     print("I entered the process form function!!! ")
-    print(request.form)
+    print(request.form['form_name'])
+    if request.form['form_name'] == "":
+        return "Please Enter Your name ! "
+    else:
+        return render_template('show.html'
+                                ,show_name=request.form['form_name']
+                                ,show_location=request.form['form_dojo_location']
+                                ,show_fav_language = request.form['form_fav_language']
+                                ,show_comment=request.form['form_comment'])
 
 if __name__ == "__main__":
     app.run(debug =True)
