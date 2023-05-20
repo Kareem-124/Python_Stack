@@ -1,0 +1,15 @@
+.my_container{
+    width: 50%;
+    border: 1px solid rgb(7, 7, 7);
+    margin: 20rem  auto;
+}
+
+body{
+    width: 100rem;
+    margin: 0px auto;
+}
+
+.mid{
+margin-left:  14rem; 
+}
+
