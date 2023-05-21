@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>index page</title>
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+                <h3> Money : {{player_money}} $      &nbsp  &nbsp &nbsp &nbsp  Moves left : {{moves}}</h3>
+
+            </div>
+        </nav>
+        <div class="row row-cols-md-4 g-4 mt-5">
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/farm.jpg') }}" class="card-img-top" alt="farm image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>Farms</strong></h5>
+                        <p class="card-text">(Earns 10 - 20 gold)</p>
+                    </div>
+                    <form class="card-footer text-center" action="/process_money" method="post">
+                        <button class="btn btn-primary" name="property" value="farm" {{disabled}}>Find Gold!</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/cave.jpg') }}" class="card-img-top" alt="cave image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong> Cave</strong></h5>
+                        <p class="card-text">(Earns 5 - 10 gold)
+                        </p>
+                    </div>
+                    <form class="card-footer text-center" action="/process_money" method="post">
+                        <button class="btn btn-primary" name="property" value="cave" {{disabled}}>Find Gold!</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/home.jpg') }}" class="card-img-top" alt="home image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>House</strong></h5>
+                        <p class="card-text">(Earns 2 - 5 gold)</p>
+                    </div>
+                    <form class="card-footer text-center" action="/process_money" method="post">
+                        <button class="btn btn-primary" name="property" value="house" {{disabled}}>Find Gold!</button>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/market.jpg') }}" class="card-img-top"
+                        alt="market image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>Market</strong></h5>
+                        <p class="card-text">(Earns/Lose 0 - 50 gold)</p>
+                    </div>
+                    <form class="card-footer text-center" action="/process_money" method="post">
+                        <button class="btn btn-primary" name="property" value="market" {{disabled}}>Find Gold!</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card mt-5 scrollbar-ripe-malinka height mb-5 ">
+            <div class="card-body card-footer bg-primary-subtle">
+                <h4 id="section1"><strong>Activities History</strong></h4>
+            </div>
+            <div class="card-body scrol">
+
+                <p>
+                    {% for text in range(activity_length ,-1,-1) : %}
+                    {{activity[text]|safe}}
+                    {%endfor%}
+                </p>
+            </div>
+        </div>
+        <form action="/process_money" method="post" class="text-center">
+            <button class="btn btn-primary  mb-3" name="property" value="reset">Reset</button>
+        </form>
+</body>
+
+</html>
