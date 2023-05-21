@@ -7,8 +7,6 @@ def index():
 
 @app.route('/process', methods=['POST'])
 def process_form():
-    print("I entered the process form function!!! ")
-    print(request.form['form_name'])
     if request.form['form_name'] == "":
         return "Please Enter Your name ! "
     else:
