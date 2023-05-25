@@ -12,7 +12,7 @@ app.secret_key = '1234'
 def index():
     global init
     if init == True:
-        print(f"The value of inti = {init}")
+        
         session['game_running'] = False
         session['class'] = "bg-primary-subtle" 
         session['massage'] = "Start The Game"
@@ -45,7 +45,6 @@ def check():
         if session['button_massage'] == "Start":                # Start the game flag and get a random number
             session['game_running'] = True
             session['random_num'] = random.randint(1 , 100)
-            print(f"THE VLAUE OF RNAD = {session['random_num']}")
             session['button_massage'] = "Check !"
         
         

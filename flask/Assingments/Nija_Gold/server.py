@@ -44,6 +44,7 @@ def process_money():
         session['activity_list'].append(
             f'<p class="green">  Made : ({generate_money} $)  from the Farms .... {date.strftime("%c")}</p>')
         return redirect('/')
+    
     elif request.form['property'] == "cave":
         generate_money = random.randint(5, 10)
         session['money'] += generate_money
@@ -51,6 +52,7 @@ def process_money():
         session['activity_list'].append(
             f'<p class="green">  Made : ({generate_money} $)  from the Cave .... {date.strftime("%c")}</p>')
         return redirect('/')
+    
     elif request.form['property'] == "house":
         generate_money = random.randint(2, 5)
         session['money'] += generate_money
@@ -58,6 +60,7 @@ def process_money():
         session['activity_list'].append(
             f'<p class="green">  Made : ({generate_money} $)  from the House .... {date.strftime("%c")}</p>')
         return redirect('/')
+    
     elif request.form['property'] == "market":
         generate_money = random.randint(-50, 50)
         session['money'] += generate_money
@@ -74,8 +77,6 @@ def process_money():
         init = True
         return redirect('/')
 
-    else:
-        pass
 
 
 if __name__ == "__main__":

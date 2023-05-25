@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>index page</title>
+
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container">
+                {%if moves <= 5: %} {% set energy_bg="color-red" %} {%else%} {% set energy_bg="" %} {%endif%} <h3> Money
+                    : {{player_money}} $ &nbsp &nbsp &nbsp &nbsp Moves left : &nbsp <span class={{energy_bg}}> {{moves}}
+                    </span> &nbsp / {{energy_ceil}}</h3>
+
+            </div>
+        </nav>
+        <div class="row row-cols-md-4 g-4 mt-5">
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/farm.jpg') }}" class="card-img-top" alt="farm image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>Farms (lvl{{farm_level}})</strong></h5>
+                        <p class="card-text">(Earns {{farm_lower_income}} - {{farm_max_income}} gold)</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <form class=" d-inline-block text-center " action="/process_money" method="post">
+                            <button class="btn btn-primary" name="property" value="farm" {{disabled}}>Find
+                                Gold!</button>
+                        </form>
+                        <form class=" d-inline-block text-center " action="/process_level_up" method="post">
+                            <button class="btn btn-primary" name="invest_window_button" value="invest_farm"
+                                {{disabled}}>Invest</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/cave.jpg') }}" class="card-img-top" alt="farm image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>Cave (lvl{{cave_level}})</strong></h5>
+                        <p class="card-text">(Earns {{cave_lower_income}} - {{cave_max_income}} gold)</p>
+                        <p class="card-text">({{cave_treasure_chance}}% chance to discover a Treasure !)</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <form class=" d-inline-block text-center " action="/process_money" method="post">
+                            <button class="btn btn-primary" name="property" value="cave" {{disabled}}>Explore The
+                                Cave</button>
+                        </form>
+                        <form class=" d-inline-block text-center " action="/process_level_up" method="post">
+                            <button class="btn btn-primary" name="invest_window_button" value="invest_cave"
+                                {{disabled}}>Invest</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/home.jpg') }}" class="card-img-top" alt="home image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>House (lvl{{house_level}})</strong></h5>
+                        <p class="card-text">Available Energy Storage</p>
+                        <p><strong>({{energy_ceil}})</strong></p>
+                    </div>
+                    <form class="card-footer text-center" action="/process_level_up" method="post">
+                        <button class="btn btn-primary" name="invest_window_button" value="invest_house"
+                            {{disabled}}>Invest</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='img/market.jpg') }}" class="card-img-top" alt="farm image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>Market (lvl{{market_level}})</strong></h5>
+                        <p class="card-text"><strong> Buy</strong> Energy:<strong> {{buy_price}}$</strong> - <strong>Sell</strong> Energy: <strong>{{sell_price}}$</strong></p>
+                        <p class="card-text color-red">({{taxes_value}}% Taxes)</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <form class=" d-inline-block text-center " action="/process_money" method="post">
+                            <button class="btn btn-primary" name="property" value="buy" {{disabled_buy}}>Buy</button>
+                        </form>
+                        <form class=" d-inline-block text-center " action="/process_level_up" method="post">
+                            <button class="btn btn-primary" name="invest_window_button" value="invest_market"
+                                {{disabled}}>Invest</button>
+                        </form>
+                        <form class=" d-inline-block text-center " action="/process_money" method="post">
+                            <button class="btn btn-primary" name="property" value="sell"
+                                {{disabled}}>Sell</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card mt-5 scrollbar-ripe-malinka height mb-5 ">
+            <div class="card-body card-footer bg-primary-subtle">
+                <h4 id="section1"><strong>Activities History</strong></h4>
+            </div>
+            <div class="card-body scrol">
+
+                <p id="Actvity">
+                    {% for text in range(activity_length ,-1,-1) : %}
+                <p id="Actvity">
+
+                    <span>{{loop.revindex}} -</span>
+                    {{activity[text]|safe}}
+                </p>
+                {%endfor%}
+                </p>
+            </div>
+        </div>
+        <form action="/process_money" method="post" class="text-center">
+            <button class="btn btn-primary fs-3 mb-3" name="property" value="reset">Restart</button>
+        </form>
+        {% if invest_window:%}
+        <div class="bg-red1">
+            <div class="bg-red">
+                <div class="card mb-3 ">
+                    <img src="/static/img/{{image_level_up}}" class="card-img-top img_invest_window"
+                        alt="level2_farm_image">
+                    <div class="card-body">
+                        <h3 class="card-title">{{property_name}} Level {{next_level}}</h3>
+                        <p class="card-text fs-2">{{upgrade_details|safe}}</p>
+                        <p class="card-text"><small class="text-body-secondary">Your Current {{property_name}} Level
+                                {{property_level}}</small></p>
+                    </div>
+                    <form action="/process_level_up" method="post" class="text-center bg-primary-subtle">
+                        <button class="btn btn-danger fs-3 m-4" name="invest_window_button"
+                            value="cancel">Cancel</button>
+                        <button class="btn btn-primary fs-3 " name="invest_window_button"
+                            value="level_up_{{property_name}}" {{button_disabled}}>Level Up:
+                            {{upgrade_cost}}{{currency}}</button>
+
+                    </form>
+                    {%endif%}
+                </div>
+
+            </div>
+        </div>
+</body>
+
+</html>

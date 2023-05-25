@@ -1,0 +1,2 @@
+global init 
+init = True
