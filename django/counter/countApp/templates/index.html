@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">    
+    <title>index page</title>
+    <style>
+
+        .color::placeholder {
+        color: red;
+        opacity: 1; /* Firefox */
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Counter
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Total Counter Number: {{counter_index}} times</h5>
+                <h5 class="card-title">Page  Refresh Counter Number: {{refresh_counter}} times</h5>
+                <h5 class="card-title">User Counter Number: {{user_counter}} times</h5>
+                
+                <p>
+                <form action="process" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="user_increment">
+                    <div class="grid gap-0 column-gap-12">
+                        <button class="btn btn-primary g-col-4  " name="user_increment" value="1">+</button>
+                        <input type="number" name="user_counter" class="col-3 {{color}} "
+                            placeholder="{{placeholder_text}}">
+                    </div>
+                </form>
+                </p>
+
+                <div class="container">
+                    <div class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col">
+                            <form action="process" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="form_type" value="increment">
+                                <button class="btn btn-primary" name="increment" value="1">Increment Visit by 2</button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="reset" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" name="reset" value="reset">Rest</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
