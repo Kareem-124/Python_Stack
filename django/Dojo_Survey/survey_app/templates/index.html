@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">  
+    <style>
+        body {
+            padding: 10rem;
+
+        }
+    </style>
+    <title>index</title>
+</head>
+
+<body>
+    <div class="container-sm">
+        <form action="/process" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-primary-subtle col-2" id="basic-addon1">Your Name:</span>
+                <input name="form_name" type="text" class="form-control text-primary" placeholder="Enter Your Name"
+                    aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text col-2 bg-primary-subtle" id="basic-addon1">Dojo Location:</span>
+                <select name="form_dojo_location" class="form-select" aria-label="Default select example">
+
+                    <option value="Palestine">Palestine</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Korea">Korea</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text col-2 bg-primary-subtle" id="basic-addon1">Favorite Language</span>
+                <select name="form_fav_language" class="form-select" aria-label="Default select example">
+
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="HTML">HTML</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-text bg-primary-subtle col-2" >Comment (Optional)</div>
+                <textarea name="form_comment" class="form-control text-primary" aria-label="With textarea"></textarea>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button  class="btn btn-primary bg-primary-subtle text-black  btn-lg" >Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
