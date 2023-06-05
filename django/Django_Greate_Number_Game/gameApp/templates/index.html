@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>index page</title>
+</head>
+
+<body>
+    <div class="my_container">
+        <div class="card text-center ">
+            <div class="card-header">
+                <h1>Welcome to the GREAT Number Game !</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">I am thinking of a number between <strong>1 - 100 </strong></h5>
+                <p class="card-text"><strong> Take a Guess ! </strong></p>
+
+                <div class="card  text-center {{bg_class}} mb-3 mid" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-title"><strong>{{box_massage}}</strong></h6>
+                        <form action="/check" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="user_input" class="form-control" {{disable}}>
+
+                    </div>
+                </div>
+
+
+                <button class="btn btn-primary" name="check_button" value="1">{{button_massage}}</button>
+                </form>
+            </div>
+            <div class="card-footer text-body-secondary">
+                {{massage}}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
