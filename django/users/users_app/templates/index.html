@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>index page</title>
+    <style>
+    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+
+<body>
+    <div class="container mt-5 border border-2 pb-5 pt-5 ps-2 pe-2">
+        <table class="table table-striped border">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in users_data %}
+                <tr>
+                    <th scope="row">{{data.id}}</th>
+                    <td>{{data.first_name}} {{data.last_name}}</td>
+                    <td>{{data.email_address}}</td>
+                    <td>{{data.age}}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        <hr class="border border-primary-subtle border-3 opacity-75 mt-4">
+
+
+        <form action="{% url 'users_app:add_user' %}" method="POST">
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-auto ">
+                    <label class="form-label col-form-label fw-bold "> First Name</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name = "first_name" class="form-control me-5" placeholder="First name" aria-label="First name">
+                </div>
+                <div class="col-auto">
+                    <label class="form-label col-form-label fw-bold"> Last Name</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="last_name" class="form-control me-5" placeholder="Last name" aria-label="Last name">
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-auto ">
+                    <label class="form-label col-form-label fw-bold ms-n5"> Email Address</label>
+                </div>
+                <div class="col-auto">
+                    <input type="email" name="email_address" class="form-control me-5" placeholder="Email Address" aria-label="First name">
+                </div>
+                <div class="col-auto">
+                    <label class="form-label col-form-label fw-bold ms-4"> Age</label>
+                </div>
+                <div class="col-auto">
+                    <input type="number" name="age" class="form-control me-5" placeholder="Age" aria-label="Last name">
+                </div>
+            </div>
+            
+            <div class="col-12 mt-4 text-center ">
+                <button type="submit" class="btn btn-primary btn-lg " value="add_user">Add</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
