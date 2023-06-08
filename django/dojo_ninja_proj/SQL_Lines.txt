@@ -1,0 +1,40 @@
+dojo.objects.create(name="Epic", city="Bermingham", state = "UK")
+dojo.objects.create(name="Legendary", city="Berlin", state = "Germany")
+dojo.objects.create(name="Origin", city="Soul", state = "Korea")
+
+Query: Delete the 3 dojos you just created
+c= dojo.objects.all()
+del.delete()
+
+Query: Create 3 more dojos
+dojo.objects.create(name="Epic", city="Bermingham", state = "UK")
+dojo.objects.create(name="Legendary", city="Berlin", state = "Germany")
+dojo.objects.create(name="Origin", city="Soul", state = "Korea")
+
+ninja.objects.create(first_name="Jack",last_name = "Shadow", dojo_id = dojo.objects.get(id=5))
+ninja.objects.create(first_name="Wiliam",last_name = "Armstrong", dojo_id = dojo.objects.get(id=5))
+ninja.objects.create(first_name="Max",last_name = "Lighting", dojo_id = dojo.objects.get(id=5))
+
+ninja.objects.create(first_name="Ragnaros",last_name = "Fire_Lord", dojo_id = dojo.objects.get(id=6))
+ninja.objects.create(first_name="Shivana",last_name = "Windrunner", dojo_id = dojo.objects.get(id=6))
+ninja.objects.create(first_name="Trion",last_name = "Deffender", dojo_id = dojo.objects.get(id=6))
+
+ninja.objects.create(first_name="Uther",last_name = "LightBringer", dojo_id = dojo.objects.get(id=4))
+ninja.objects.create(first_name="Rexar",last_name = "Hunter", dojo_id = dojo.objects.get(id=4))
+ninja.objects.create(first_name="Valliera",last_name = "Master_of_Shadows", dojo_id = dojo.objects.get(id=4))
+
+h = dojo.objects.get( id = 4)
+for ninja in h.ninjas.all():
+	print(ninja.first_name)
+
+
+h = dojo.objects.last()
+for ninja in h.ninjas.all():
+     print(ninja.first_name)
+
+Query: Retrieve the last ninja's dojo
+h = dojo.objects.last()
+h.ninjas.last()
+
+Query: Create a new dojo
+dojo.objects.create(name = "rare", city = "Nablus", state = "PS", desc = "The Best in the Area")
