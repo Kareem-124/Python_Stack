@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>index page</title>
+    {% load static %}
+    {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+
+<body>
+    <div class="container mt-5 border pb-5 pt-3">
+        <h1>{{author.first_name}} {{author.last_name}}</h1>
+        <h4>ID : {{author.id}}</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-1">Notes:</div>
+                <div class="col-8 ">{{author.notes}}</div>
+            </div>
+            <div class="row">
+                <div class="col">Books:</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul>
+                        {% for book in author.books.all %}
+                        <li>{{book.title}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col-4" method="post" action="{% url 'books_authors_app:add_book' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-8">
+                        <select class=" form-select " name="book_list">
+                            <option selected>Open this select menu</option>
+                            {% for book in rest_books%}
+                            <option value="{{book.id}}">{{book.title}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                        <button class="btn btn-primary col-2" name="add_book" >Add</button>
+                        <input type="hidden" name="author_id" value="{{author.id}}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>
