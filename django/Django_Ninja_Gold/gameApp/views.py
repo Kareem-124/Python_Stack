@@ -49,52 +49,25 @@ f'<p class="bg-success done text-center win">  Well Done !! You won the round !<
 def process_money(request):
     global init
     request.session['moves'] -= 1
-    if request.POST['property'] == "farm":
+    prop = request.POST['property']
+    if prop == "farm":
         generate_money = random.randint(10, 20)
-        request.session['player_money'] += generate_money
-        date = datetime.datetime.now()
-        request.session['activity'].append(f'<p class="green">  Made : ({generate_money} $)  from the Farms .... {date.strftime("%c")}</p>')
-        request.session.modified = True
-        
-        return redirect('/')
-    
     elif request.POST['property'] == "cave":
         generate_money = random.randint(5, 10)
-        request.session['player_money'] += generate_money
-        date = datetime.datetime.now()
-        request.session['activity'].append(
-            f'<p class="green">  Made : ({generate_money} $)  from the Cave .... {date.strftime("%c")}</p>')
-        request.session.modified = True
-        
-        return redirect('/')
-    
     elif request.POST['property'] == "house":
         generate_money = random.randint(2, 5)
-        request.session['player_money'] += generate_money
-        date = datetime.datetime.now()
-        request.session['activity'].append(
-            f'<p class="green">  Made : ({generate_money} $)  from the House .... {date.strftime("%c")}</p>')
-        request.session.modified = True
-        
-        return redirect('/')
-    
     elif request.POST['property'] == "market":
         generate_money = random.randint(-50, 50)
-        request.session['player_money'] += generate_money
-        if generate_money >= 0:
-            date = datetime.datetime.now()
-            request.session['activity'].append(
-                f'<p class="green">  Made : ({generate_money} $)  from the Market .... {date.strftime("%c")}</p>')
-            request.session.modified = True
-            
-        else:
+        if generate_money < 0:
             date = datetime.datetime.now()
             request.session['activity'].append(
                 f'<p class="red">  Lost : ({generate_money} $)  from the Market .... Opps !  {date.strftime("%c")}</p>')
-            request.session.modified = True
-            
-        return redirect('/')
-    elif request.POST['property'] == "reset":
-        init = True
-        return redirect('/')
+    request.session['player_money'] += generate_money        
+    date = datetime.datetime.now()
+    request.session['activity'].append(f'<p class="green">  Made : ({generate_money} $)  from the {prop} .... {date.strftime("%c")}</p>')
+    request.session.modified = True
+    return redirect('/')
 
+def reset(request):
+    init = True
+    return redirect('/')
