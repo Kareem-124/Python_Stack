@@ -85,7 +85,7 @@
                 {{dojo.name}} ({{dojo.ninjas.all.count }})
                 <form action="{% url 'dojo_ninja_app:process' %}" method="post">
                     {% csrf_token %}
-                    <button name="process" value="delete_dojo" class="btn btn-danger mt-3 btn-sm">X</button>
+                    <button name="process" value="delete_dojo" class="btn btn-danger btn-sm">X</button>
                     <input type="hidden" name="dojo_name_to_delete" value={{dojo.id}}>
                 </form>
             </li>
