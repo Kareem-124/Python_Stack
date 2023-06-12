@@ -43,12 +43,14 @@
         <form action="{% url 'users_app:add_user' %}" method="POST">
             {% csrf_token %}
             <div class="row d-flex justify-content-center mt-5">
+                <!-- First Name Input Field -->
                 <div class="col-auto ">
                     <label class="form-label col-form-label fw-bold "> First Name</label>
                 </div>
                 <div class="col-auto">
                     <input type="text" name = "first_name" class="form-control me-5" placeholder="First name" aria-label="First name">
                 </div>
+                <!-- Last Name Input Field -->
                 <div class="col-auto">
                     <label class="form-label col-form-label fw-bold"> Last Name</label>
                 </div>
@@ -58,12 +60,14 @@
             </div>
 
             <div class="row d-flex justify-content-center mt-5">
+                <!-- Email Input Field -->
                 <div class="col-auto ">
                     <label class="form-label col-form-label fw-bold ms-n5"> Email Address</label>
                 </div>
                 <div class="col-auto">
                     <input type="email" name="email_address" class="form-control me-5" placeholder="Email Address" aria-label="First name">
                 </div>
+                <!-- Age Input Field -->
                 <div class="col-auto">
                     <label class="form-label col-form-label fw-bold ms-4"> Age</label>
                 </div>
