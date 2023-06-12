@@ -7,7 +7,7 @@ class dojo(models.Model):
     desc = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
-    # ninjas = name of the ninjas in this dojo
+    # ninjas = a list of instances of ninja
 
 class ninja(models.Model):
     first_name = models.CharField(max_length=255)

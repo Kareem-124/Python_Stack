@@ -16,46 +16,55 @@
     <div class="container mt-5 border">
         <div class="row mb-3">
             <div class="col text-center ">
+                <!-- Add Dojo Form -->
                 <form action="{% url 'dojo_ninja_app:process' %}" method="post">
                     {% csrf_token %}
                     <h2>Add a Dojo</h2>
+                    <!-- Add Dojo Name Section -->
                     <div class="form-group row mt-3">
                         <label for="dojoName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="dojo_name" placeholder="Dojo Name">
                         </div>
                     </div>
+                    <!-- Add Dojo City Section -->
                     <div class="form-group row mt-3">
                         <label for="city" class="col-sm-2 col-form-label">City</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="city" placeholder="City">
                         </div>
                     </div>
+                    <!-- Add Dojo State Section -->
                     <div class="form-group row mt-3">
                         <label for="state" class="col-sm-2 col-form-label">State</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="state" placeholder="State">
                         </div>
                     </div>
+                    <!-- Submit Button for Dojo -->
                     <button name="process" value="add_dojo" class="btn btn-primary mt-3 btn-lg">Add</button>
                 </form>
             </div>
             <div class="col text-center">
+                <!-- Add Ninja Form -->
                 <form action="{% url 'dojo_ninja_app:process' %}" method="post">
                     {% csrf_token %}
                     <h2>Add a Ninja</h2>
+                    <!-- Add Ninja First Name Section -->
                     <div class="form-group row mt-3">
                         <label class="col-sm-2 col-form-label">First Name:</label>
                         <div class="col-sm-6">
                             <input type="text" name="first_name" class="form-control" placeholder="First Name">
                         </div>
                     </div>
+                    <!-- Add Ninja Last Name Section -->
                     <div class="form-group row mt-3">
                         <label class="col-sm-2 col-form-label">Last Name:</label>
                         <div class="col-sm-6">
                             <input type="text" name="last_name" class="form-control" placeholder="Last Name">
                         </div>
                     </div>
+                    <!-- Select Dojo for Ninja to Enroll in -->
                     <div class="form-group row mt-3">
                         <label class="col-sm-2 col-form-label">Dojo</label>
                         <div class="col-sm-6">
@@ -75,23 +84,29 @@
     <div class="container ">
         <hr class="border border-primary border-2 opacity-50">
     </div>
-    <div class="container d-flex flex-column align-items-center border">
 
+    <div class="container d-flex flex-column align-items-center border">
+        <!-- Display Dojos Section -->
         <h2>All The Dojos</h2>
         <ol class="list-group list-group-numbered row " style="width: 100%;">
             {% for dojo in dojos%}
+            <!-- Iterate each dojo instance in dojos  -->
             <li
                 class="list-group-item   col-sm-6 align-self-center  d-flex justify-content-between align-items-center border">
-                {{dojo.name}} ({{dojo.ninjas.all.count }})
+                <!-- the .count returns the number of instances -->
+                {{dojo.name}} ({{dojo.ninjas.all.count }}) 
+                <!-- Open a form to to process the deletion  -->
                 <form action="{% url 'dojo_ninja_app:process' %}" method="post">
                     {% csrf_token %}
                     <button name="process" value="delete_dojo" class="btn btn-danger btn-sm">X</button>
+                    <!-- Hidden input : to send the Dojo ID that will be deleted -->
                     <input type="hidden" name="dojo_name_to_delete" value={{dojo.id}}>
                 </form>
             </li>
+            <!-- Display the enrolled Ninjas in each Dojo -->
             <ul class=" list-group d-flex flex-column align-items-center ">
                 {% for ninja in dojo.ninjas.all %}
-                <li class=" col-sm-6 align-self-center align-self-center">{{ninja.first_name}}</li>
+                <li class=" col-sm-6 align-self-center align-self-center">{{ninja.first_name}} {{ninja.last_name}}</li>
                 {% endfor %}
             </ul>
             {% endfor %}
