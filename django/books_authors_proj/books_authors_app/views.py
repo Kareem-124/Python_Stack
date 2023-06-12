@@ -10,8 +10,6 @@ def index(request):
 
 # This method is responsible of checking whether the user is trying to add
 # a new book or a new author to the Data Base
-
-
 def process(request):
     if request.POST['process'] == 'create_book':
         book.objects.create(
@@ -22,11 +20,10 @@ def process(request):
         return redirect('/create_author/')
     return redirect('/')
 
+
 # Open the Details Page of the Specified Book using its ID
 
-
 def book_details(request, id):
-    id_list = []
     given_book = book.objects.get(id=id)
     given_book_authors = given_book.authors.all()
     # filter out the already existed authors and get the remaining
