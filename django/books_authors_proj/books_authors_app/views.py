@@ -27,8 +27,7 @@ def book_details(request, id):
     given_book = book.objects.get(id=id)
     given_book_authors = given_book.authors.all()
     # filter out the already existed authors and get the remaining
-    rest_authors = author.objects.exclude(
-        id__in=[o.id for o in given_book_authors])
+    rest_authors = author.objects.exclude(id__in=[o.id for o in given_book_authors])
     context = {
         'book': given_book,
         'rest_authors': rest_authors

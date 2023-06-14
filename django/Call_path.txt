@@ -1,3 +1,6 @@
 djangoenv/Scripts/activate
 
+Fresh Graduate:
 
+Email:
+resume@exalt.ps

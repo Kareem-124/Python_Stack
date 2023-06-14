@@ -15,4 +15,4 @@ def add_user(request):
 
     users.objects.create(first_name= first_name_form, last_name = last_name_form, email_address = email_address_form, age = age_form)
     
-    return redirect('/')
+    return redirect('add_user')
