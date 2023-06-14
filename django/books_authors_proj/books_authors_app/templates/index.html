@@ -50,18 +50,17 @@
                     <tbody>
                         {% for book in books%}
                         <tr>
-                            
+
                             <td>{{book.id}}</td>
                             <td>{{book.title}}</td>
-                            <td><a href="{% url 'books_authors_app:book_details' id=book.id %}" >Action</a></td>
-                            
+                            <td><a href="{% url 'books_authors_app:book_details' id=book.id %}">Action</a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

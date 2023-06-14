@@ -26,6 +26,19 @@
                 <hr class="border border-primary border-2 opacity-75">
             </div>
         </div>
+        <!-- The Validation Error Massages Section -->
+        {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                {% for massage in messages%}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Warring ! :</strong> {{massage}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
         <!--Form Section -->
         <form class=" mb-3" action="{% url 'TV_Show_app:show_update' id=show.id %}" method="post">
             {% csrf_token %}
@@ -33,26 +46,29 @@
                 <!-- Title Section -->
                 <div class="col-sm-6">
                     <label class="col-form-label ">Title</label>
-                    <input name="edit_title" class="form-control" type="text" placeholder="Enter Your Movie Title" value="{{show.title}}">
+                    <input name="title" class="form-control" type="text" placeholder="Enter Your Movie Title"
+                        value="{{show.title}}">
                 </div>
             </div>
             <!-- Network Section -->
             <div class="form-group row justify-content-center ">
                 <div class="col-sm-3">
                     <label class="col-form-label ">Network</label>
-                    <input  name="edit_network" class="form-control" type="text" placeholder="Enter The Network" value="{{show.network}}">
+                    <input name="network" class="form-control" type="text" placeholder="Enter The Network"
+                        value="{{show.network}}">
                 </div>
                 <!-- Release Date Section -->
                 <div class="col-sm-3">
-                    <label class="col-form-label ">Release Date : {{show.release_date}}</label>
-                    <input  name="edit_release_date" class="form-control" type="date" value="{{show.release_date}}" >
+                    <label class="col-form-label ">Release Date</label>
+                    <input name="release_date" class="form-control" type="date" value="{{date}}">
                 </div>
             </div>
             <!-- Description Section -->
             <div class="form-group row justify-content-center">
                 <div class="col-sm-6">
                     <label class="col-form-label">Description</label>
-                    <textarea class="form-control"  name="edit_desc" id="" rows="10" style="resize: none;">{{show.desc}} </textarea>
+                    <textarea class="form-control" name="desc" id="" rows="10"
+                        style="resize: none;">{{show.desc}} </textarea>
                 </div>
             </div>
             <!-- Buttons 'Update' / 'Go to Show' Section -->
@@ -63,11 +79,13 @@
             </div>
             <div class="form-group row text-center justify-content-center mb-3 ">
                 <div class="col-sm-6 mb-3">
-                    <a href="{% url 'TV_Show_app:show_page'%}" class="btn btn-primary ">Go to Show Page</a>
+                    <a href="{% url 'TV_Show_app:show_page'%}" class="btn btn-primary ">Show Page</a>
                 </div>
             </div>
         </form>
     </div>
+    {% load static %}
+<script src="{% static 'Js/bootstrap.bundle.js' %}"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
 
     <title>Add New Show</title>
     {% load static %}
-    {% csrf_token %}
+    <!-- {% csrf_token %} -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 
@@ -24,6 +24,20 @@
             <div class="col-sm-8">
                 <hr class="border border-primary border-2 opacity-75">
             </div>
+            <!-- The Validation Error Massages Section -->
+            {% if messages %}
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    {% for massage in messages%}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Warring ! :</strong> {{massage}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Start of the Form Section -->
             <form action="{% url 'TV_Show_app:create_show_new' %}" method="post">
                 {% csrf_token %}
@@ -31,27 +45,28 @@
                 <div class="form-group row  justify-content-center">
                     <div class="col-sm-6">
                         <label class="col-form-label ">Title</label>
-                        <input name="new_title" class="form-control" type="text" placeholder="Enter Your Movie Title">
+                        <input name="title" class="form-control" type="text" placeholder="Enter Your Movie Title">
                     </div>
                 </div>
-                
+
                 <div class="form-group row justify-content-center ">
                     <!-- Network Section -->
                     <div class="col-sm-3">
                         <label class="col-form-label ">Network</label>
-                        <input name="new_network" class="form-control" type="text" placeholder="Enter The Network">
+                        <input name="network" class="form-control" type="text" placeholder="Enter The Network">
                     </div>
                     <!-- Release Date Section -->
                     <div class="col-sm-3">
                         <label class="col-form-label ">Release Date</label>
-                        <input name="new_release_date" class="form-control" type="date" placeholder="">
+                        <input name="release_date" class="form-control" type="date" placeholder="">
                     </div>
                 </div>
                 <!-- Description Section -->
                 <div class="form-group row justify-content-center">
                     <div class="col-sm-6">
                         <label class="col-form-label">Description</label>
-                        <textarea name="new_desc" class="form-control" name="" id="" rows="10" style="resize: none;"></textarea>
+                        <textarea name="desc" class="form-control" name="" id="" rows="10"
+                            style="resize: none;"></textarea>
                     </div>
                 </div>
                 <!-- Button 'Create' Section -->
@@ -63,5 +78,7 @@
             </form>
         </div>
 </body>
+{% load static %}
+<script src="{% static 'Js/bootstrap.bundle.js' %}"></script>
 
 </html>
