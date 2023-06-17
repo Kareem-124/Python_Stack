@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>index page</title>
+    {% load static %}
+    <!-- {% csrf_token %} -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+
+<body>
+    <div class="container mt-5 border pb-5 pt-3">
+        <h1>{{book.title}}</h1>
+        <h4>ID : {{book.id}}</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-1">Description:</div>
+                <div class="col-8 ">{{book.desc}}</div>
+            </div>
+            <div class="row">
+                <div class="col">Authors:</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul>
+                        {% for author in book.authors.all %}
+                        <li>{{author.first_name}} {{author.last_name}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col-4" method="post" action="{% url 'books_authors_app:add_author' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-8">
+                        <select class=" form-select " name="author_list">
+                            <option selected>Open this select menu</option>
+                            {% for author in rest_authors%}
+                            <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                        <button class="btn btn-primary col-2" name="add_author" >Add</button>
+                        <input type="hidden" name="book_id" value="{{book.id}}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

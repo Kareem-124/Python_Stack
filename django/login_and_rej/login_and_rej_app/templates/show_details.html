@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{show.title}}</title>
+    {% load static %}
+    <!-- {% csrf_token %} -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+
+<body style="background-color: rgba(231, 233, 249, 0.707);">
+    <div class="container border mt-6" style="background-color: rgb(255, 255, 255);">
+        <div class="row justify-content-center mt-2 ">
+            <div class="col-sm-6">
+                <h1>{{show.title}} Details</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <hr class="border border-primary border-2 opacity-75">
+            </div>
+        </div>
+        <!-- Section : Display Movie Title -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-sm-2  ">
+                <h5 class="fw-bold">Title:</h5>
+            </div>
+            <div class="col-sm-4 ">
+                <p>{{show.title}}</p>
+            </div>
+        </div>
+        <!-- Section : Display Network  -->
+        <div class="row justify-content-center ">
+            <div class="col-sm-2  ">
+                <h5 class="fw-bold">Network:</h5>
+            </div>
+            <div class="col-sm-4">
+                <p>{{show.network}}</p>
+            </div>
+        </div>
+        <!-- Section : Display Release Date  -->
+        <div class="row justify-content-center ">
+            <div class="col-sm-2  ">
+                <h5 class="fw-bold">Release Date:</h5>
+            </div>
+            <div class="col-sm-4">
+                <p>{{show.release_date}}</p>
+            </div>
+        </div>
+        <!-- Section : Display Description  -->
+        <div class="row justify-content-center ">
+            <div class="col-sm-2  ">
+                <h5 class="fw-bold">Description:</h5>
+            </div>
+            <div class="col-sm-4">
+                <p>{{show.desc}}</p>
+            </div>
+        </div>
+
+
+        <!-- Section : Display Last Update  -->
+        <div class="row justify-content-center" style="margin-top: 7rem;">
+            <div class="col-sm-2  ">
+                <h5 class="fw-bold">Last Update:</h5>
+            </div>
+            <div class="col-sm-4">
+                <p>{{show.updated_at}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <hr class="border border-primary border-2 opacity-75">
+            </div>
+        </div>
+        <!-- Section : Update Button / Delete Button  -->
+        <div class="row justify-content-center align-items-center  ">
+            <div class="col-sm-6 ">
+                <div class="row justify-content-between align-items-center mb-4 mt-3 ">
+                    <div class="col-sm-4 ">
+                        <a href="{% url 'TV_Show_app:show_edit' id=show.id %}" class="btn btn-primary ">Update</a>
+                        <span>&nbsp; | &nbsp; </span>
+                        <a href="{% url 'TV_Show_app:show_delete' id=show.id%}" class="btn btn-danger ">Delete</a>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <a href="{% url 'TV_Show_app:show_page'%}" class="btn btn-secondary ">Show Page</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+<script src="{% static 'Js/bootstrap.bundle.js' %}"></script>
+
+</html>
