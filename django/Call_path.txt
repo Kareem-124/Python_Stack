@@ -20,4 +20,4 @@ resume@exalt.ps
                         {{value|safe}}
                         {% endif %}
                         {% endfor %}
-                        
+                                                <a href="{% url 'fav_books_app:add_to_fav' user_id=user.id book_id=book.id %}">Add to Favorite ({{book.title}}){{ user.first_name }}</a>
