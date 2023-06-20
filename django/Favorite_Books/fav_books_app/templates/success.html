@@ -30,12 +30,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'fav_books_app:success_redirect' %}">Wall</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'fav_books_app:books' %}">Books</a>
                     </li>
                 </ul>
                 <form class="d-flex align-items-center">
                     <h4> Welcome , {{first_name}} {{last_name}}</h4>
-                    <a href="{% url 'the_wall_app:logout_process' %}" class="ms-3 btn btn-secondary">Logout</a>
+                    <a href="{% url 'fav_books_app:logout_process' %}" class="ms-3 btn btn-secondary">Logout</a>
                 </form>
             </div>
         </div>
@@ -62,7 +65,7 @@
         {% endif %}
 
         <main class="pb-5">
-            <form action="{% url 'the_wall_app:msg_process' %}" method="post">
+            <form action="{% url 'fav_books_app:msg_process' %}" method="post">
                 {% csrf_token %}
                 <div class="row justify-content-center">
                     <div class="col-sm-10">
@@ -104,7 +107,7 @@
             </div>
             {% endif %}
             {% endfor %}
-            <form action="{% url 'the_wall_app:comment_process' %}" method="post">
+            <form action="{% url 'fav_books_app:comment_process' %}" method="post">
                 {% csrf_token %}
                 <div class="  row justify-content-center">
                     <div class="col-sm-10">
@@ -117,6 +120,7 @@
                                     <input type="hidden" name="msg_id" value= {{msg.id}}>
                             </div>
                         </div>
+
                     </div>
                     <div class="row justify-content-end mt-3 ">
                         <div class="col-sm-3  text-center me-3">
