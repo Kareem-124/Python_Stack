@@ -7,7 +7,6 @@ import bcrypt
 
 
 def index(request):
-
     return render(request, 'index.html')
 
 
@@ -31,14 +30,11 @@ def login(request):
         return redirect('/')
 
 # : This will clear the massages from messages (error / success) --> redirect to /success
-
-
 def success_redirect(request):
     list(messages.get_messages(request))
     return redirect('/success')
 
 # : The main page after the user successfully logged in, it will open "The Wall"
-
 
 def success(request):
     user = Users.objects.get(id=request.session['user_id'])
