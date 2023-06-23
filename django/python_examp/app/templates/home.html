@@ -22,6 +22,7 @@
 
 <body style="background-color: rgba(231, 233, 249, 0.707);">
     <!-- Navigation Bar -->
+    {% if user_session %} 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             </button>
@@ -74,7 +75,7 @@
                         <tr>
                             <td><a href="{% url 'app:team_details' id=team.id %}">{{team.team_name}}</a> </td>
                             <td>{{team.skill_level}}</td>
-                            <td>player name / 9</td>
+                            <td>{{team.players.all.count}} / 9</td>
                             <td>{{team.game_day}}</td>
                         </tr>
                         {% endfor %}
@@ -87,6 +88,9 @@
             
         </main>
     </div>
+    {% else %}
+    <h1> YOU NEED To BE LOGGED IN</h1>
+    {% endif %}
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

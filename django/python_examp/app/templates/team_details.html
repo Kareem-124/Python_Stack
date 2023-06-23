@@ -24,6 +24,8 @@
 <body style="background-color: rgba(231, 233, 249, 0.707);">
     <!-- The Validation Error Massages Section -->
     <div class="container mt-6 mb-3" style="background-color: white;">
+        {% if user_session %} 
+        
         {% if messages %}
         <div class="row justify-content-center mt-3">
             <div class="col-sm-12">
@@ -87,27 +89,74 @@
                             <label class="col-form-label" for=""><strong>{{team_object.game_day}}</strong></label>
                         </div>
 
-                    </div>
+                        <!-- Players -->
+                        <div class="row mb-3">
+                            {% if team_object.players.all.count >= 9 %}
+                            <div class="col-sm-12">
+                                <h3>Team Is Full !</h3>
+                            </div>
+                            {% endif %}
+                            <div class="col-sm-3">
+                                <label class="col-form-label" for="">Players</label>
 
+                                <ul>
+                                    {% for player in player_object%}
+                                    <li>{{player.player_name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                            
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        {% if current_user.id == team_object.user.id %}
-        <div class="row justify-content-start">
+            <hr>
+            <form action="{% url 'app:add_player_process' team_id=team_object.id %}" method="post">
+                {% csrf_token %}
+                <div class="row justify-content-center">
+                    <div class="col-sm-12">
+                        <h3 class="text-center"> Add Player</h3>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-3">
+                            <label class="col-form-label" for="">Player Name:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="player_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" class="btn btn-primary"> Add Player</button>
+                        </div>
+                    </div>
+            </form>
 
-            <div class="col-sm-1 me-3">
-                <a class="btn btn-secondary" href="{% url 'app:team_edit' team_id=team_object.id%}">edit</a>
-            </div>
 
-            <div class="col-sm-1">
-                <a class="btn btn-danger" href="{% url 'app:delete_team' team_id=team_object.id %}">Delete</a>
+
+
+
+            {% if current_user.id == team_object.user.id %}
+            <div class="row justify-content-start">
+
+                <div class="col-sm-1 me-3">
+                    <a class="btn btn-secondary" href="{% url 'app:team_edit' team_id=team_object.id%}">edit</a>
+                </div>
+
+                <div class="col-sm-1">
+                    <a class="btn btn-danger" href="{% url 'app:delete_team' team_id=team_object.id %}">Delete</a>
+                </div>
             </div>
+            {% endif %}
+
+
         </div>
+        {% else %}
+        <h1> YOU NEED To BE LOGGED IN</h1>
         {% endif %}
-
-
-    </div>
     </div>
 
 

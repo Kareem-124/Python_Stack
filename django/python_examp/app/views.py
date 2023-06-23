@@ -58,6 +58,7 @@ def success(request):
     context = {
         'user_object' : user,
         'team_object' :team,
+        'user_session' : request.session['user_id'],
     }
     return render(request, 'home.html', context)
 
@@ -103,10 +104,13 @@ def create_new_team_process(request):
 def team_details(request, id):
     user = User.objects.get(id = request.session['user_id'])
     team = Team.objects.get(id = id)
-
+    player_obj = team.players.all()
+    print(player_obj)
     context = {
         'current_user' : user,
         'team_object' : team,
+        'player_object' : player_obj,
+        'user_session' : request.session['user_id'],
 
     }
     return render(request,'team_details.html',context)
@@ -141,6 +145,17 @@ def team_edit(request,team_id):
     context = {
         'current_user' : user,
         'team_object' : team,
+        'user_session' : request.session['user_id']
 
     }
     return render(request,'team_edit.html',context)
+
+def add_player_process(request,team_id):
+    error = player.objects.validate_player(request.POST,team_id)
+    if len(error) > 0:
+        for key, value in error.items():
+            messages.error(request, value)
+        return redirect('/team/' + str(team_id))
+    team = Team.objects.get(id = team_id)
+    player.objects.create(player_name = request.POST['player_name'],team = team)
+    return redirect('/team/' + str(team_id))

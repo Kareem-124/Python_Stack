@@ -46,6 +46,15 @@ class Validation(models.Manager):
         if not day_found :
             error['game_day'] = "Please enter a valid day name"
         return error
+    
+    def validate_player(self,data, team_id):
+        error = {}
+        if len(data['player_name']) < 2 :
+            error['player_name'] = "Player Name should be at least 2 characters"
+        team = Team.objects.get(id = team_id)
+        if team.players.all().count() >= 9:
+            error['player_number'] = "Only 9 Player at Maximum"
+        return error
 
 
 
@@ -63,4 +72,10 @@ class Team(models.Model):
     skill_level = models.SmallIntegerField()
     game_day=models.CharField(max_length=12)
     user = models.ForeignKey(User, related_name='teams',on_delete=models.CASCADE )
+    objects = Validation()
+    # players
+
+class player(models.Model):
+    player_name = models.CharField(max_length=100)
+    team = models.ForeignKey(Team, related_name='players',on_delete=models.CASCADE )
     objects = Validation()

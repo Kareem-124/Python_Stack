@@ -21,5 +21,6 @@ urlpatterns = [
     path('new_team_redirect_process', views.new_team_redirect_process, name='new_team_redirect_process'),   # Login Process                                    
     path('edit_new_team_process/<int:team_id>', views.edit_new_team_process, name='edit_new_team_process'),   # Login Process  
     path('delete_team/<int:team_id>/', views.delete_team, name='delete_team'),                                   
+    path('add_player/<int:team_id>/', views.add_player_process, name='add_player_process'),                                   
 
 ]
