@@ -19,8 +19,7 @@ def reg_process(request):
         password = request.POST['password']
         ps_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
         User.objects.create(
-            first_name=request.POST['first_name'], last_name=request.POST[
-                'last_name'], email=request.POST['email'], password=ps_hash
+            user_name=request.POST['user_name'], email=request.POST['email'], password=ps_hash
         )
         messages.success(request, "User has been created Successfully!")
         return redirect('/')
@@ -36,7 +35,7 @@ def login_process(request):
             # if we get True after checking the password, we may put the user id in session
             request.session['user_id'] = logged_user.id
             messages.success(request, "You have Successfully logged in")
-            return redirect('/success')
+            return redirect('/home')
         else:
             # if we didn't find anything in the database by searching by username or if the passwords don't match,
             messages.error(request, "Email or Password incorrect")
@@ -49,16 +48,18 @@ def login_process(request):
 # : This will clear the massages from messages (error / success) --> redirect to /success
 def success_redirect_process(request):
     list(messages.get_messages(request))
-    return redirect('/success')
+    return redirect('/home')
 
 # Page : Open The main page after the user successfully logged in, it will open ""
 def success(request):
     # Create User Session
     user = User.objects.get(id=request.session['user_id'])
+    team = Team.objects.all()
     context = {
-        'user_object' : user
+        'user_object' : user,
+        'team_object' :team,
     }
-    return render(request, 'success.html', context)
+    return render(request, 'home.html', context)
 
 
 # Process : Logout
@@ -76,3 +77,70 @@ def table(request):
 # Page : form
 def form(request):
     return render(request,'form.html')
+
+def new_team_redirect_process(request):
+    list(messages.get_messages(request))
+    return redirect('/team/new')
+# Page : new_team
+def new_team(request):
+    return render(request,'new_team.html')
+
+def create_new_team_process(request):
+    error = Team.objects.validate_team(request.POST)
+    if len(error) > 0:
+        for key, value in error.items():
+            messages.error(request, value)
+        return redirect('/team/new')
+    else:  # if Validation passed store the team in the db and encrypt the password
+        user = User.objects.get(id = request.session['user_id'])
+        Team.objects.create(
+            team_name=request.POST['team_name'], skill_level=request.POST['skill_level'], game_day=request.POST['game_day'].capitalize(),user = user
+        )
+        return redirect('/success_redirect_process')
+    
+
+# Page : Team Details
+def team_details(request, id):
+    user = User.objects.get(id = request.session['user_id'])
+    team = Team.objects.get(id = id)
+
+    context = {
+        'current_user' : user,
+        'team_object' : team,
+
+    }
+    return render(request,'team_details.html',context)
+
+
+def edit_new_team_process(request,team_id):
+    error = Team.objects.validate_team(request.POST)
+    if len(error) > 0:
+        for key, value in error.items():
+            messages.error(request, value)
+        return redirect('/team/' + str(team_id) + '/edit')
+
+    team = Team.objects.get(id = team_id)
+    team.team_name = request.POST['team_name']
+    team.skill_level = request.POST['skill_level']
+    team.game_day = request.POST['game_day']
+    team.save()
+
+    return redirect('/success_redirect_process')
+
+
+def delete_team(request,team_id):
+    team = Team.objects.get(id=team_id)
+    team.delete()
+    return redirect ('/success_redirect_process')
+
+
+def team_edit(request,team_id):
+    user = User.objects.get(id = request.session['user_id'])
+    team = Team.objects.get(id = team_id)
+
+    context = {
+        'current_user' : user,
+        'team_object' : team,
+
+    }
+    return render(request,'team_edit.html',context)
